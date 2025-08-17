@@ -164,6 +164,21 @@
                 android:text="@string/app_drawer_settings" />
 
             <RelativeLayout
+                android:id="@+id/settings_drawer_toggle_switch_holder"
+                style="@style/SettingsHolderTextViewOneLinerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <org.fossify.commons.views.MyMaterialSwitch
+                    android:id="@+id/settings_drawer_toggle_switch"
+                    style="@style/SettingsSwitchStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/toggle_drawer" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/settings_drawer_column_count_holder"
                 style="@style/SettingsHolderTextViewOneLinerStyle"
                 android:layout_width="match_parent"
@@ -245,6 +260,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/home_screen_settings" />
+
+            <RelativeLayout
+                style="@style/SettingsHolderTextViewOneLinerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_background">
+
+                <org.fossify.commons.views.MyMaterialSwitch
+                    android:id="@+id/settings_auto_sort_home_apps"
+                    style="@style/SettingsSwitchStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/auto_sort_home_apps" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/settings_home_screen_row_count_holder"

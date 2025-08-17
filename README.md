@@ -2,11 +2,34 @@
 
 <img alt="Logo" src="graphics/icon.webp" width="120" />
 
+
 <a href='https://play.google.com/store/apps/details?id=org.fossify.home'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height=80/></a> <a href="https://f-droid.org/en/packages/org.fossify.home/"><img src="https://fdroid.gitlab.io/artwork/badge/get-it-on-en.svg" alt="Get it on F-Droid" height=80/></a> <a href="https://apt.izzysoft.de/fdroid/index/apk/org.fossify.home"><img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height=80/></a>
 
 Fossify Launcher is your gateway to a fast, personalized, and privacy-first home screen experience.
 No ads, no bloat – just a smooth, efficient launcher designed to fit your unique style and
 preferences.
+
+## Scope of Changes
+---
+* [ ] Remove the drawer
+* [ ] Make apps sort automatically (how will widgets interact?)
+* [x] Option to toggle drawer
+* [x] Option to auto sort apps
+* [ ] Option to always show page indicators when there's more than one page
+* [x] Fix navigation bar background
+* [x] Fix notification bar contrast
+* [x] Fix Rename dialogue theme
+* [ ] Use better colour picker for the primary colour
+* [ ] 
+
+
+### When the App Drawer is Disabled
+* [ ] Do not show "Remove" button in context menu
+* [ ] Show "Hide" button in context menu
+* [ ] Show all apps on home screen
+  * [ ] Move apps to next page if needed
+
+
 
 **🚀 LIGHTNING-FAST NAVIGATION:**  
 Navigate your device with speed and precision. Fossify Launcher is optimized to be responsive and
