@@ -5,7 +5,7 @@ import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
-import kotlinx.coroutines.FlowPreview
+import androidx.core.view.isVisible
 import org.fossify.commons.dialogs.RadioGroupDialog
 import org.fossify.commons.extensions.beGoneIf
 import org.fossify.commons.extensions.beVisibleIf
@@ -55,6 +55,11 @@ class SettingsActivity : SimpleActivity() {
         setupToolbar(binding.settingsToolbar, NavigationIcon.Arrow)
         refreshMenuItems()
 
+        setupAlwaysShowPageIndicators()
+        setupAutomaticHomeLayout()
+        setupSortHomeApps()
+        setupSortEachPage()
+        setupEnableDrawer()
         setupPurchaseThankYou()
         setupCustomizeColors()
         setupUseEnglish()
@@ -76,6 +81,50 @@ class SettingsActivity : SimpleActivity() {
             binding.settingsHomeScreenLabel
         ).forEach {
             it.setTextColor(getProperPrimaryColor())
+        }
+    }
+
+    private fun setupAlwaysShowPageIndicators() {
+        binding.settingsAlwaysShowPageIndicators.isChecked = config.alwaysShowPageIndicators
+        binding.settingsAlwaysShowPageIndicators.setOnClickListener {
+            config.alwaysShowPageIndicators = binding.settingsAlwaysShowPageIndicators.isChecked
+        }
+    }
+
+    private fun setupAutomaticHomeLayout() {
+        binding.settingsHomeAutoLayout.isChecked = config.automaticHomeLayout
+        binding.settingsHomeAutoLayout.setOnClickListener {
+            config.automaticHomeLayout = binding.settingsHomeAutoLayout.isChecked
+        }
+    }
+
+    private fun setupSortHomeApps() {
+        binding.settingsSortHomeApps.isChecked = config.sortHomeApps
+        binding.settingsSortHomeApps.setOnClickListener {
+            config.sortHomeApps = binding.settingsSortHomeApps.isChecked
+
+            binding.settingsHomeSortEachPageHolder.beVisibleIf(config.sortHomeApps)
+        }
+    }
+
+    private fun setupSortEachPage() {
+        binding.settingsHomeSortEachPageHolder.beVisibleIf(config.sortHomeApps)
+        binding.settingsHomeSortEachPage.isChecked = config.sortEachPage
+        binding.settingsHomeSortEachPage.setOnClickListener {
+            config.sortEachPage = binding.settingsHomeSortEachPage.isChecked
+            binding.settingsHomeSortEachPageHolder.beVisibleIf(config.sortHomeApps)
+        }
+    }
+
+    private fun setupEnableDrawer() {
+        binding.settingsDrawerToggleSwitch.isChecked = config.enableDrawer
+        binding.settingsDrawerToggleSwitch.setOnClickListener {
+            config.enableDrawer = binding.settingsDrawerToggleSwitch.isChecked
+            binding.settingsDrawerColumnCountHolder.beVisibleIf(config.enableDrawer)
+            binding.settingsDrawerSearchHolder.beVisibleIf(config.enableDrawer)
+            binding.settingsOpenKeyboardOnAppDrawerHolder.beVisibleIf(config.enableDrawer && config.showSearchBar)
+            binding.settingsCloseAppDrawerOnOtherAppHolder.beVisibleIf(config.enableDrawer)
+            // TODO: Tell the home screen to add apps
         }
     }
 
@@ -155,7 +204,7 @@ class SettingsActivity : SimpleActivity() {
     }
 
     private fun setupOpenKeyboardOnAppDrawer() {
-        binding.settingsOpenKeyboardOnAppDrawerHolder.beVisibleIf(config.showSearchBar)
+        binding.settingsOpenKeyboardOnAppDrawerHolder.beVisibleIf(config.showSearchBar && config.enableDrawer)
         binding.settingsOpenKeyboardOnAppDrawer.isChecked = config.autoShowKeyboardInAppDrawer
         binding.settingsOpenKeyboardOnAppDrawerHolder.setOnClickListener {
             binding.settingsOpenKeyboardOnAppDrawer.toggle()
@@ -164,6 +213,7 @@ class SettingsActivity : SimpleActivity() {
     }
 
     private fun setupCloseAppDrawerOnOtherAppOpen() {
+        binding.settingsCloseAppDrawerOnOtherAppHolder.beVisibleIf(config.enableDrawer)
         binding.settingsCloseAppDrawerOnOtherApp.isChecked = config.closeAppDrawer
         binding.settingsCloseAppDrawerOnOtherAppHolder.setOnClickListener {
             binding.settingsCloseAppDrawerOnOtherApp.toggle()
@@ -173,6 +223,7 @@ class SettingsActivity : SimpleActivity() {
 
     private fun setupDrawerColumnCount() {
         val currentColumnCount = config.drawerColumnCount
+        binding.settingsDrawerColumnCountHolder.beVisibleIf(config.enableDrawer)
         binding.settingsDrawerColumnCount.text = currentColumnCount.toString()
         binding.settingsDrawerColumnCountHolder.setOnClickListener {
             val items = ArrayList<RadioItem>()
@@ -199,6 +250,7 @@ class SettingsActivity : SimpleActivity() {
 
     private fun setupDrawerSearchBar() {
         val showSearchBar = config.showSearchBar
+        binding.settingsDrawerSearchHolder.beVisibleIf(config.enableDrawer)
         binding.settingsShowSearchBar.isChecked = showSearchBar
         binding.settingsDrawerSearchHolder.setOnClickListener {
             binding.settingsShowSearchBar.toggle()

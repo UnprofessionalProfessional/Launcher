@@ -10,24 +10,35 @@ No ads, no bloat – just a smooth, efficient launcher designed to fit your uniq
 preferences.
 
 ## Scope of Changes
----
-* [ ] Remove the drawer
-* [ ] Make apps sort automatically (how will widgets interact?)
 * [x] Option to toggle drawer
+    * [x] Disable drawer
+* [x] Option for automatic layout (iOS-style)
+  * [ ] Make apps sort automatically (how will widgets interact?)
 * [x] Option to auto sort apps
-* [ ] Option to always show page indicators when there's more than one page
+    * [ ] Implementation
+    * [x] Option to sort per-page: when enabled, the contents of each page are sorted separately
+      * [ ] Implementation
+* [x] Option to always show page indicators
 * [x] Fix navigation bar background
 * [x] Fix notification bar contrast
 * [x] Fix Rename dialogue theme
-* [ ] Use better colour picker for the primary colour
+* [ ] Fix drawer scrollbar size
+* [ ] Fix holding on apps in drawer?
+* ~~[ ] Use better colour picker for the primary colour~~ **Not in the scope of this project**
+* [ ] Use default app shape for folders
 * [ ] 
 
 
-### When the App Drawer is Disabled
+### When the App Drawer is Disabled:
 * [ ] Do not show "Remove" button in context menu
 * [ ] Show "Hide" button in context menu
 * [ ] Show all apps on home screen
   * [ ] Move apps to next page if needed
+
+
+### When Automatic Layout is Enabled:
+* [ ] Prevent app dragging
+* [ ] Folders go before apps
 
 
 

@@ -262,17 +262,64 @@
                 android:text="@string/home_screen_settings" />
 
             <RelativeLayout
+                android:id="@+id/settings_always_show_page_indicators_holder"
                 style="@style/SettingsHolderTextViewOneLinerStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ripple_background">
 
                 <org.fossify.commons.views.MyMaterialSwitch
-                    android:id="@+id/settings_auto_sort_home_apps"
+                    android:id="@+id/settings_always_show_page_indicators"
                     style="@style/SettingsSwitchStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/auto_sort_home_apps" />
+                    android:text="@string/always_show_page_indicators" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/settings_home_auto_layout_holder"
+                style="@style/SettingsHolderTextViewOneLinerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_background">
+
+                <org.fossify.commons.views.MyMaterialSwitch
+                    android:id="@+id/settings_home_auto_layout"
+                    style="@style/SettingsSwitchStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_auto_layout" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/settings_sort_home_apps_holder"
+                style="@style/SettingsHolderTextViewOneLinerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_background">
+
+                <org.fossify.commons.views.MyMaterialSwitch
+                    android:id="@+id/settings_sort_home_apps"
+                    style="@style/SettingsSwitchStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sort_home_apps" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/settings_home_sort_each_page_holder"
+                style="@style/SettingsHolderTextViewOneLinerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_background">
+
+                <org.fossify.commons.views.MyMaterialSwitch
+                    android:id="@+id/settings_home_sort_each_page"
+                    style="@style/SettingsSwitchStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_sort_each_page" />
             </RelativeLayout>
 
             <RelativeLayout

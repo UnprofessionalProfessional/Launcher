@@ -59,6 +59,7 @@ import org.fossify.home.databinding.HomeScreenGridBinding
 import org.fossify.home.extensions.config
 import org.fossify.home.extensions.getDrawableForPackageName
 import org.fossify.home.extensions.homeScreenGridItemsDB
+import org.fossify.home.helpers.Config
 import org.fossify.home.helpers.ITEM_TYPE_FOLDER
 import org.fossify.home.helpers.ITEM_TYPE_ICON
 import org.fossify.home.helpers.ITEM_TYPE_SHORTCUT
@@ -122,7 +123,8 @@ class HomeScreenGrid(context: Context, attrs: AttributeSet, defStyle: Int) :
             widgetViews.forEach { it.resetTouches() }
             closeFolder()
             accessibilityHelper.invalidateRoot()
-        }
+        },
+        context
     )
 
     private var currentlyOpenFolder: HomeScreenFolder? = null
@@ -1287,7 +1289,7 @@ class HomeScreenGrid(context: Context, attrs: AttributeSet, defStyle: Int) :
         }
 
         // Only draw page indicators when there is a need for it
-        if (pager.shouldDisplayPageChangeIndicator()) {
+        if (pager.shouldDisplayPageChangeIndicator(context)) {
             val pageCount = pager.getPageCount()
             val pageIndicatorsRequiredWidth =
                 pageCount * pageIndicatorRadius * 2 + pageCount * (pageIndicatorMargin - 1)
@@ -1297,7 +1299,9 @@ class HomeScreenGrid(context: Context, attrs: AttributeSet, defStyle: Int) :
             var currentPageIndicatorLeft = pageIndicatorsStart
             val pageIndicatorY = pageIndicatorsYPos.toFloat() + sideMargins.top + iconMargin
             val pageIndicatorStep = pageIndicatorRadius * 2 + pageIndicatorMargin
+
             emptyPageIndicatorPaint.alpha = pager.getPageChangeIndicatorsAlpha()
+
             // Draw empty page indicators
             for (page in 0 until pageCount) {
                 canvas.drawCircle(
@@ -2156,6 +2160,7 @@ private class AnimatedGridPager(
     private val getNextPageBound: () -> Int,
     private val getPrevPageBound: () -> Int,
     private val pageChangeStarted: () -> Unit,
+    private val context: Context
 ) {
 
     companion object {
@@ -2168,6 +2173,8 @@ private class AnimatedGridPager(
             RIGHT
         }
     }
+
+    private var config = context.config
 
     private var lastPage = 0
     private var currentPage = 0
@@ -2196,8 +2203,13 @@ private class AnimatedGridPager(
 
     fun isAnimatingPageChange() = pageChangeAnimLeftPercentage != 0f
 
-    fun shouldDisplayPageChangeIndicator() =
-        isSwiped() || isAnimatingPageChange() || pageChangeIndicatorsAlpha != 0f
+    fun shouldDisplayPageChangeIndicator(context: Context): Boolean {
+        if (context.config.alwaysShowPageIndicators) {
+            return true
+        } else {
+            return isSwiped() || isAnimatingPageChange() || pageChangeIndicatorsAlpha != 0f
+        }
+    }
 
     fun getPageChangeIndicatorsAlpha() = if (pageChangeIndicatorsAlpha != 0f) {
         (pageChangeIndicatorsAlpha * 255.0f).toInt()
@@ -2302,7 +2314,7 @@ private class AnimatedGridPager(
     }
 
     fun itemMovementStopped() {
-        scheduleIndicatorsFade()
+            scheduleIndicatorsFade()
     }
 
     fun nextPage(redraw: Boolean = false): Boolean {
@@ -2376,8 +2388,10 @@ private class AnimatedGridPager(
     }
 
     private fun scheduleIndicatorsFade() {
-        pageChangeIndicatorsAlpha = 1f
-        getHandler().postDelayed(startFadingIndicators, PAGE_INDICATORS_FADE_DELAY)
+        if (!config.alwaysShowPageIndicators) {
+            pageChangeIndicatorsAlpha = 1f
+            getHandler().postDelayed(startFadingIndicators, PAGE_INDICATORS_FADE_DELAY)
+        }
     }
 
     private fun doWithPageChangeDelay(needed: PageChangeArea, pageChangeFunction: () -> Boolean) {

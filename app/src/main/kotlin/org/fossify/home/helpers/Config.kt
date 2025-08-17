@@ -33,8 +33,32 @@ class Config(context: Context) : BaseConfig(context) {
         get() = prefs.getBoolean(CLOSE_APP_DRAWER, false)
         set(closeAppDrawer) = prefs.edit().putBoolean(CLOSE_APP_DRAWER, closeAppDrawer).apply()
 
+    var automaticHomeLayout: Boolean
+        get() = prefs.getBoolean(HOME_AUTO_LAYOUT, false)
+        set(automaticHomeLayout) = prefs.edit().putBoolean(HOME_AUTO_LAYOUT, automaticHomeLayout).apply()
+
     var autoShowKeyboardInAppDrawer: Boolean
         get() = prefs.getBoolean(AUTO_SHOW_KEYBOARD_IN_APP_DRAWER, false)
         set(autoShowKeyboardInAppDrawer) = prefs.edit()
             .putBoolean(AUTO_SHOW_KEYBOARD_IN_APP_DRAWER, autoShowKeyboardInAppDrawer).apply()
+
+    var sortHomeApps: Boolean
+        get() = prefs.getBoolean(SORT_HOME_APPS, false)
+        set(sortHomeApps) = prefs.edit()
+            .putBoolean(SORT_HOME_APPS, sortHomeApps).apply()
+
+    var alwaysShowPageIndicators: Boolean
+        get() = prefs.getBoolean(ALWAYS_SHOW_PAGE_INDICATORS, true)
+        set(alwaysShowPageIndicators) = prefs.edit()
+            .putBoolean(ALWAYS_SHOW_PAGE_INDICATORS, alwaysShowPageIndicators).apply()
+
+    var enableDrawer: Boolean
+        get() = prefs.getBoolean(TOGGLE_DRAWER, true)
+        set(enableDrawer) = prefs.edit()
+            .putBoolean(TOGGLE_DRAWER, enableDrawer).apply()
+
+    var sortEachPage: Boolean
+        get() = prefs.getBoolean(HOME_SORT_EACH_PAGE, false)
+        set(sortEachPage) = prefs.edit()
+            .putBoolean(HOME_SORT_EACH_PAGE, sortEachPage).apply()
 }

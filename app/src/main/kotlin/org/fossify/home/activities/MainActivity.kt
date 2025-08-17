@@ -314,7 +314,7 @@ class MainActivity : SimpleActivity(), FlingListener {
         super.onConfigurationChanged(newConfig)
         binding.allAppsFragment.root.onConfigurationChanged()
         binding.widgetsFragment.root.onConfigurationChanged()
-        updateStatusbarColor(Color.TRANSPARENT)
+        //updateStatusbarColor(Color.TRANSPARENT)   // TODO: Remove if unnecessary
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -372,7 +372,7 @@ class MainActivity : SimpleActivity(), FlingListener {
                             binding.widgetsFragment.root.y = min(
                                 a = max(0f, newY), b = mScreenHeight.toFloat()
                             )
-                        } else if (mLongPressedIcon == null) {
+                        } else if (mLongPressedIcon == null && config.enableDrawer) {   // Prevent the drawer from being dragged up
                             val newY = mAllAppsFragmentY - diffY
                             binding.allAppsFragment.root.y = min(
                                 a = max(0f, newY), b = mScreenHeight.toFloat()
@@ -399,7 +399,7 @@ class MainActivity : SimpleActivity(), FlingListener {
 
                 if (!mIgnoreUpEvent) {
                     if (!mIgnoreYMoveEvents) {
-                        if (binding.allAppsFragment.root.y < mScreenHeight * 0.5) {
+                        if (binding.allAppsFragment.root.y < mScreenHeight * 0.5 && config.enableDrawer) {
                             showFragment(binding.allAppsFragment)
                         } else if (isAllAppsFragmentExpanded()) {
                             hideFragment(binding.allAppsFragment)
@@ -947,7 +947,7 @@ class MainActivity : SimpleActivity(), FlingListener {
             return
         }
 
-        if (!isWidgetsFragmentExpanded()) {
+        if (!isWidgetsFragmentExpanded() && config.enableDrawer) {
             mIgnoreUpEvent = true
             showFragment(binding.allAppsFragment)
         }

@@ -14,6 +14,13 @@ const val SHOW_SEARCH_BAR = "show_search_bar"
 const val CLOSE_APP_DRAWER = "close_app_drawer"
 const val AUTO_SHOW_KEYBOARD_IN_APP_DRAWER = "auto_show_keyboard_in_app_drawer"
 
+// new features
+const val TOGGLE_DRAWER = "toggle_drawer"
+const val ALWAYS_SHOW_PAGE_INDICATORS = "always_show_page_indicators"
+const val HOME_AUTO_LAYOUT = "home_auto_layout"
+const val HOME_SORT_EACH_PAGE = "home_sort_each_page"
+const val SORT_HOME_APPS = "sort_home_apps"
+
 // default home screen grid size
 const val ROW_COUNT = 6
 const val COLUMN_COUNT = 5
